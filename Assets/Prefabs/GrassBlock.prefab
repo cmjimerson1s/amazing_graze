@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2515826840485659568}
-  - component: {fileID: 8906325395835046092}
   - component: {fileID: 2827306788624924237}
   m_Layer: 0
   m_Name: GrassBlock
@@ -34,18 +33,6 @@ Transform:
   - {fileID: 453803756770630577}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8906325395835046092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7741936192835523358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90f89c28e6eff29428665bab1f3222e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &2827306788624924237
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -65,7 +52,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 3, z: 1}
+  m_Size: {x: 1, y: 4, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8234929260609720946
 GameObject:

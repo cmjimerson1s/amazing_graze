@@ -9,11 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1589893613755169537}
-  - component: {fileID: 6239367214545099844}
   - component: {fileID: 1969837442913989935}
   m_Layer: 0
   m_Name: NullBlock
-  m_TagString: Tile
+  m_TagString: NullTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,18 +33,6 @@ Transform:
   - {fileID: 1215233296512802951}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6239367214545099844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717540803782380144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90f89c28e6eff29428665bab1f3222e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1969837442913989935
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -65,7 +52,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 3, z: 1}
+  m_Size: {x: 1, y: 4, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6460625631654176837
 GameObject:
@@ -80,7 +67,7 @@ GameObject:
   - component: {fileID: 9154151765216037049}
   m_Layer: 0
   m_Name: GridBlock
-  m_TagString: Tile
+  m_TagString: NullTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
