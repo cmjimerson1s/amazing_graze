@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
@@ -8,14 +9,25 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private float distance = 1u;
+    private HUD hudDisplay;
+    private int movesLeft;
 
+    private void Start() {
+        
+        movesLeft = 3;
+        hudDisplay = FindObjectOfType<HUD>();
+    }
 
     // Update is called once per frame
     void Update()
     {
+            if (movesLeft >= 1) {
+                PlayerGridMovement();
 
-            PlayerGridMovement();
+            }
+
     }
+
 
     private void Movement(Vector3 direction) {
 
@@ -36,24 +48,32 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W)) {
             if (DetectTile(Vector3.forward)) {
                 Movement(Vector3.forward);
+                UpdateTotalSteps();
+
             }
         }
 
         if (Input.GetKeyDown(KeyCode.A)) {
             if (DetectTile(Vector3.left)) {
                 Movement(Vector3.left);
+                UpdateTotalSteps();
+
             }
         }
 
         if (Input.GetKeyDown(KeyCode.S)) {
             if (DetectTile(-Vector3.forward)) {
                 Movement(-Vector3.forward);
+                UpdateTotalSteps();
+
             }
         }
 
         if (Input.GetKeyDown(KeyCode.D)) {
             if (DetectTile(Vector3.right)) {
                 Movement(Vector3.right);
+                UpdateTotalSteps();
+
             }
         }
 
@@ -74,6 +94,11 @@ public class PlayerMovement : MonoBehaviour
        
     }
 
+    private void UpdateTotalSteps() {
+        movesLeft--;
+        hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
+        
+    }
 
 
 }
