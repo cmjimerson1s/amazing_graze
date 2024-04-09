@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     {
             if (movesLeft >= 1) {
                 PlayerGridMovement();
-
             }
 
     }
@@ -35,13 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Tile")) {
-            Debug.Log("True");
-        } else {
-            Debug.Log("False");
-        }
-    }
 
     private void PlayerGridMovement() {
 
