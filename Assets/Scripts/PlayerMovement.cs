@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
             GameWon();
             return;
         }
+
         if (movesLeft >= 1) {
             PlayerGridMovement(); 
         } else { 
