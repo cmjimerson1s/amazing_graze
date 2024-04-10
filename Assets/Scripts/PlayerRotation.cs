@@ -13,6 +13,13 @@ public class PlayerRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
+
+    }
+
+    public void PlayerMeshRotation() {
+
         if (Input.GetKeyDown(KeyCode.W)) {
             Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward);
             transform.rotation = targetRotation;
@@ -34,8 +41,8 @@ public class PlayerRotation : MonoBehaviour
             transform.rotation = targetRotation;
         }
 
-
     }
+    
 
 }
 

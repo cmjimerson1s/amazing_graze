@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private float distance = 1u;
     private HUD hudDisplay;
+    private PlayerRotation spinPlayer;
     private int movesLeft;
     private int stepsTaken;
     private bool winState;
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
         movesLeft = 3;
         stepsTaken = 0;
         hudDisplay = FindObjectOfType<HUD>();
+        spinPlayer = FindObjectOfType<PlayerRotation>();
         DisableHUD();
 
     }
@@ -86,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
     private void Movement(Vector3 direction) {
 
         transform.Translate(direction * distance);
+        spinPlayer.PlayerMeshRotation();
 
     }
 
