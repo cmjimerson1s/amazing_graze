@@ -13,12 +13,15 @@ public class PlayerMovement : MonoBehaviour
     private float distance = 1u;
     private HUD hudDisplay;
     private int movesLeft;
+    private int stepsTaken;
+    private bool winState;
 
     private void Start() {
         
         movesLeft = 3;
+        stepsTaken = 0;
         hudDisplay = FindObjectOfType<HUD>();
-        DisableGameOver();
+        DisableHUD();
 
     }
 
@@ -27,7 +30,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (movesLeft >= 1) {
             PlayerGridMovement();
-        } else {
+        } else if (winState == true) {
+            GameWon();
+        } else { 
             GameOver();
         }
 
@@ -40,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
             if (DetectTile(Vector3.forward)) {
                 Movement(Vector3.forward);
                 UpdateTotal();
+                stepsTaken++;
 
             }
         }
@@ -48,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
             if (DetectTile(Vector3.left)) {
                 Movement(Vector3.left);
                 UpdateTotal();
+                stepsTaken++;
 
             }
         }
@@ -56,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
             if (DetectTile(-Vector3.forward)) {
                 Movement(-Vector3.forward);
                 UpdateTotal();
+                stepsTaken++;
 
             }
         }
@@ -63,7 +71,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D)) {
             if (DetectTile(Vector3.right)) {
                 Movement(Vector3.right);
-                UpdateTotal();
+                UpdateTotal(); 
+                stepsTaken++;
 
             }
         }
@@ -85,8 +94,12 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(ray, out hit)) {
             if (hit.collider.CompareTag("Tile")) {
                 return true;
+            } else if (hit.collider.CompareTag("WinTile")) {
+                winState = true;
+                return true;
             }
         }
+
         return false;
        
     }
@@ -119,13 +132,24 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void DisableGameOver() {
+    private void DisableHUD() {
         hudDisplay.gameOverText.gameObject.SetActive(false);
-        hudDisplay.resetButton.gameObject.SetActive(false);
+        hudDisplay.lostResetButton.gameObject.SetActive(false);
+        hudDisplay.gameWonText.gameObject.SetActive(false);
+        hudDisplay.wonNextButton.gameObject.SetActive(false);
+        hudDisplay.wonResetButton.gameObject.SetActive(false);
     }
 
     private void GameOver() {
         hudDisplay.gameOverText.gameObject.SetActive(true);
-        hudDisplay.resetButton.gameObject.SetActive(true);
+        hudDisplay.lostResetButton.gameObject.SetActive(true);
     }
+
+    private void GameWon() {
+        hudDisplay.gameWonText.gameObject.SetActive(true);
+        hudDisplay.wonNextButton.gameObject.SetActive(true);
+        hudDisplay.wonResetButton.gameObject.SetActive(true);
+        hudDisplay.stepsTakenText.SetText("Total Steps Taken: " + stepsTaken.ToString());
+    }
+
 }

@@ -9,7 +9,12 @@ public class HUD : MonoBehaviour
 {
     public TextMeshProUGUI totalStepsLeft;
     public TextMeshProUGUI gameOverText;
-    public GameObject resetButton;
+    public TextMeshProUGUI gameWonText;
+    public TextMeshProUGUI stepsTakenText;
+    public GameObject lostResetButton;
+    public GameObject wonResetButton;
+    public GameObject wonNextButton;
+
 
 
 
