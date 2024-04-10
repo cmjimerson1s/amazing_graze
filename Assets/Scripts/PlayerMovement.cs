@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -17,14 +18,18 @@ public class PlayerMovement : MonoBehaviour
         
         movesLeft = 3;
         hudDisplay = FindObjectOfType<HUD>();
+        DisableGameOver();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-            if (movesLeft >= 1) {
-                PlayerGridMovement();
-            }
+        if (movesLeft >= 1) {
+            PlayerGridMovement();
+        } else {
+            GameOver();
+        }
 
     }
 
@@ -93,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         foreach (Collider collider in colliders) {
             if (collider.CompareTag("Grass+1")) {
                 UpdateTotalStepsPlus();
-                Debug.Log("Plus1");
+                Destroy(collider.gameObject);
             } else {
                 UpdateTotalStepsMinus();
                 Debug.Log("Minus1");
@@ -114,6 +119,13 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    
+    private void DisableGameOver() {
+        hudDisplay.gameOverText.gameObject.SetActive(false);
+        hudDisplay.resetButton.gameObject.SetActive(false);
+    }
 
+    private void GameOver() {
+        hudDisplay.gameOverText.gameObject.SetActive(true);
+        hudDisplay.resetButton.gameObject.SetActive(true);
+    }
 }
