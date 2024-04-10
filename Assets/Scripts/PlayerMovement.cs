@@ -28,10 +28,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (movesLeft >= 1) {
-            PlayerGridMovement();
-        } else if (winState == true) {
+        if (winState == true) {
             GameWon();
+            return;
+        }
+        if (movesLeft >= 1) {
+            PlayerGridMovement(); 
         } else { 
             GameOver();
         }
