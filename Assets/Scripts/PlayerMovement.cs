@@ -123,8 +123,9 @@ public class PlayerMovement : MonoBehaviour
         foreach (Collider collider in colliders) {
             if (collider.CompareTag("Grass+1")) {
                 UpdateTotalStepsPlus();
+                TestMethod(collider);
                 grassSFX.Play();
-                collider.gameObject.SetActive(false);
+                //collider.gameObject.SetActive(false);
             } else if (collider.CompareTag("Collectable")) {
                 collectedItems++;
                 Destroy(collider.gameObject);
@@ -186,5 +187,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void TestMethod(Collider collider) {
+        collider.enabled = false;
+        GameObject firstChild = collider.gameObject.transform.GetChild(0).gameObject;
+        firstChild.SetActive(false);
+        //Debug.Log(firstChild.ToString());
+    }
 
 }

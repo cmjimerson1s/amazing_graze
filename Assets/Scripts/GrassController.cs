@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GrassController : MonoBehaviour
@@ -14,10 +15,12 @@ public class GrassController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (gameObject.activeSelf) {
-        //    Debug.Log("True");
-        //} else {
-        //    Debug.Log("False");
-        //}
+       if (gameObject.activeSelf) {
+
+        } else {
+            childObject.SetActive(true);
+        }
+
+     
     }
 }
