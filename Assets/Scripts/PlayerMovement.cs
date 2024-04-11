@@ -16,11 +16,16 @@ public class PlayerMovement : MonoBehaviour
     private int movesLeft;
     private int stepsTaken;
     private bool winState;
+    private int collectedItems;
+    public GameObject childObject;
+    public AudioSource grassSFX;
+    public AudioSource winSFX;
 
     private void Start() {
         
-        movesLeft = 3;
+        movesLeft = 4;
         stepsTaken = 0;
+        collectedItems = 0;
         hudDisplay = FindObjectOfType<HUD>();
         spinPlayer = FindObjectOfType<PlayerRotation>();
         DisableHUD();
@@ -101,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
             if (hit.collider.CompareTag("Tile")) {
                 return true;
             } else if (hit.collider.CompareTag("WinTile")) {
+                winSFX.Play();
                 winState = true;
                 return true;
             }
@@ -117,7 +123,12 @@ public class PlayerMovement : MonoBehaviour
         foreach (Collider collider in colliders) {
             if (collider.CompareTag("Grass+1")) {
                 UpdateTotalStepsPlus();
+                grassSFX.Play();
+                collider.gameObject.SetActive(false);
+            } else if (collider.CompareTag("Collectable")) {
+                collectedItems++;
                 Destroy(collider.gameObject);
+                CollectedItemUpdate();  
             } else {
                 UpdateTotalStepsMinus();
                 Debug.Log("Minus1");
@@ -144,6 +155,10 @@ public class PlayerMovement : MonoBehaviour
         hudDisplay.gameWonText.gameObject.SetActive(false);
         hudDisplay.wonNextButton.gameObject.SetActive(false);
         hudDisplay.wonResetButton.gameObject.SetActive(false);
+        hudDisplay.oneCollected.gameObject.SetActive(false);
+        hudDisplay.twoCollected.gameObject.SetActive(false);
+        hudDisplay.threeCollected.gameObject.SetActive(false);
+
     }
 
     private void GameOver() {
@@ -157,5 +172,19 @@ public class PlayerMovement : MonoBehaviour
         hudDisplay.wonResetButton.gameObject.SetActive(true);
         hudDisplay.stepsTakenText.SetText("Total Steps Taken: " + stepsTaken.ToString());
     }
+
+    private void CollectedItemUpdate() {
+        if (collectedItems == 1) {
+            hudDisplay.oneCollected.gameObject.SetActive(true);
+            hudDisplay.circle1.gameObject.SetActive(false);
+        } else if (collectedItems == 2) {
+            hudDisplay.twoCollected.gameObject.SetActive(true);
+            hudDisplay.circle2.gameObject.SetActive(false);
+        } else if (collectedItems == 3) {
+            hudDisplay.threeCollected.gameObject.SetActive(true);
+            hudDisplay.circle3.gameObject.SetActive(false);
+        }
+    }
+
 
 }

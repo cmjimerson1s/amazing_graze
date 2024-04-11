@@ -14,6 +14,13 @@ public class HUD : MonoBehaviour
     public GameObject lostResetButton;
     public GameObject wonResetButton;
     public GameObject wonNextButton;
+    public GameObject oneCollected;
+    public GameObject twoCollected;
+    public GameObject threeCollected;
+    public GameObject circle1;
+    public GameObject circle2;
+    public GameObject circle3;
+
 
 
 
