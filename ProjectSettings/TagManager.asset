@@ -8,6 +8,7 @@ TagManager:
   - NullTile
   - Grass+1
   - WinTile
+  - Collectable
   layers:
   - Default
   - TransparentFX

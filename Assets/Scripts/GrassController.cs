@@ -9,18 +9,21 @@ public class GrassController : MonoBehaviour
 
     void Start()
     {
-        
+        childObject.SetActive(false);   
     }
 
     // Update is called once per frame
     void Update()
     {
-       if (gameObject.activeSelf) {
-
-        } else {
-            childObject.SetActive(true);
+        if (childObject.activeSelf) {
+            StartCoroutine(DestroyChild());
         }
-
      
+    }
+
+    private IEnumerator DestroyChild() {
+        float delayTime = 1f;
+        yield return new WaitForSeconds(delayTime);
+        childObject.SetActive(false);
     }
 }

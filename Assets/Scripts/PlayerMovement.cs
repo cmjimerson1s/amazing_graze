@@ -8,12 +8,11 @@ using UnityEditor.Experimental.GraphView;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
-{
+public class PlayerMovement : MonoBehaviour {
     private float distance = 1u;
     private HUD hudDisplay;
     private PlayerRotation spinPlayer;
-    private int movesLeft;
+    [SerializeField] int movesLeft;
     private int stepsTaken;
     private bool winState;
     private int collectedItems;
@@ -23,7 +22,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start() {
         
-        movesLeft = 4;
         stepsTaken = 0;
         collectedItems = 0;
         hudDisplay = FindObjectOfType<HUD>();
@@ -191,7 +189,12 @@ public class PlayerMovement : MonoBehaviour
         collider.enabled = false;
         GameObject firstChild = collider.gameObject.transform.GetChild(0).gameObject;
         firstChild.SetActive(false);
-        //Debug.Log(firstChild.ToString());
+        NumberShowing(collider);
+    }
+
+    private void NumberShowing(Collider collider) {
+        GameObject number = collider.gameObject.transform.GetChild(1).gameObject;
+        number.SetActive(true);
     }
 
 }
