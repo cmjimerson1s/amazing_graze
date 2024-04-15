@@ -15,10 +15,12 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] int movesLeft;
     private int stepsTaken;
     private bool winState;
+    private bool keyCollected;
     private int collectedItems;
     public GameObject childObject;
     public AudioSource grassSFX;
     public AudioSource winSFX;
+    public Animator openGate;
 
     private void Start() {
         
@@ -127,7 +129,11 @@ public class PlayerMovement : MonoBehaviour {
             } else if (collider.CompareTag("Collectable")) {
                 collectedItems++;
                 Destroy(collider.gameObject);
-                CollectedItemUpdate();  
+                CollectedItemUpdate();
+            } else if (collider.CompareTag("Key")) {
+                keyCollected = true;
+                Destroy(collider.gameObject);
+                OpenFence();
             } else {
                 UpdateTotalStepsMinus();
                 Debug.Log("Minus1");
@@ -197,4 +203,9 @@ public class PlayerMovement : MonoBehaviour {
         number.SetActive(true);
     }
 
+    private void OpenFence() {
+        GameObject[] fence;
+        fence = GameObject.FindGameObjectsWithTag("Lock");
+        openGate.Play("GateOpen", 0, 0.0f);
+    }
 }

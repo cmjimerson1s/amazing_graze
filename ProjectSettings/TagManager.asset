@@ -9,6 +9,8 @@ TagManager:
   - Grass+1
   - WinTile
   - Collectable
+  - Key
+  - Lock
   layers:
   - Default
   - TransparentFX
