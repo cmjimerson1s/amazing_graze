@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour {
     public AudioSource grassSFX;
     public AudioSource winSFX;
     public Animator openGate;
+    public Animator numberSign = null;
 
     private void Start() {
         
@@ -125,7 +126,6 @@ public class PlayerMovement : MonoBehaviour {
                 UpdateTotalStepsPlus();
                 TestMethod(collider);
                 grassSFX.Play();
-                //collider.gameObject.SetActive(false);
             } else if (collider.CompareTag("Collectable")) {
                 collectedItems++;
                 Destroy(collider.gameObject);
@@ -201,6 +201,7 @@ public class PlayerMovement : MonoBehaviour {
     private void NumberShowing(Collider collider) {
         GameObject number = collider.gameObject.transform.GetChild(1).gameObject;
         number.SetActive(true);
+        numberSign.Play("NumberSign", 0, 0.0f);
     }
 
     private void OpenFence() {
