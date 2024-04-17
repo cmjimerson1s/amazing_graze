@@ -41,8 +41,8 @@ public class GrassController : MonoBehaviour {
     }
 
     private void CollectGrass() {
-        grassSFX.Play();
         UpdateTotalStepsPlus();
+        grassSFX.Play();
         Collider collider = GetComponent<Collider>();
         collider.enabled = false;
         meshChildObject.SetActive(false);

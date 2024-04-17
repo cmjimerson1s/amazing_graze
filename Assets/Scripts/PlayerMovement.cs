@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] public int movesLeft;
     private int stepsTaken;
     private bool winState;
-    private bool keyCollected;
+    public bool keyCollected;
     public int collectedItems;
     public AudioSource winSFX;
     public Animator openGate;
@@ -24,9 +24,10 @@ public class PlayerMovement : MonoBehaviour {
         
         stepsTaken = 0;
         collectedItems = 0;
+        keyCollected = false;
         hudDisplay = FindObjectOfType<HUD>();
         spinPlayer = FindObjectOfType<PlayerRotation>();
-        DisableHUD();
+        hudDisplay.DisableHUD();
 
     }
 
@@ -52,7 +53,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.W)) {
             if (DetectTile(Vector3.forward)) {
                 Movement(Vector3.forward);
-                UpdateTotal();
+                UpdateTotalStepsMinus();
                 stepsTaken++;
 
             }
@@ -61,7 +62,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.A)) {
             if (DetectTile(Vector3.left)) {
                 Movement(Vector3.left);
-                UpdateTotal();
+                UpdateTotalStepsMinus();
                 stepsTaken++;
 
             }
@@ -70,7 +71,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.S)) {
             if (DetectTile(-Vector3.forward)) {
                 Movement(-Vector3.forward);
-                UpdateTotal();
+                UpdateTotalStepsMinus();
                 stepsTaken++;
 
             }
@@ -79,7 +80,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.D)) {
             if (DetectTile(Vector3.right)) {
                 Movement(Vector3.right);
-                UpdateTotal(); 
+                UpdateTotalStepsMinus();
                 stepsTaken++;
 
             }
@@ -114,49 +115,13 @@ public class PlayerMovement : MonoBehaviour {
        
     }
 
-    private void UpdateTotal() {
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.1f);
-
-        foreach (Collider collider in colliders) {
-            if (collider.CompareTag("Grass+1")) {
-                //UpdateTotalStepsPlus();
-                //TestMethod(collider);
-                //grassSFX.Play();
-            } else if (collider.CompareTag("Collectable")) {
-                //collectedItems++;
-               // Destroy(collider.gameObject);
-                //CollectedItemUpdate();
-            } else if (collider.CompareTag("Key")) {
-                keyCollected = true;
-                Destroy(collider.gameObject);
-                OpenFence();
-            } else {
-                UpdateTotalStepsMinus();
-                Debug.Log("Minus1");
-            }
-        }
+   private void UpdateTotalStepsMinus() {
+      movesLeft--;
+      hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
 
     }
 
-
-    private void UpdateTotalStepsMinus() {
-        movesLeft--;
-        hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
-
-    }
-
-    private void DisableHUD() {
-        hudDisplay.gameOverText.gameObject.SetActive(false);
-        hudDisplay.lostResetButton.gameObject.SetActive(false);
-        hudDisplay.gameWonText.gameObject.SetActive(false);
-        hudDisplay.wonNextButton.gameObject.SetActive(false);
-        hudDisplay.wonResetButton.gameObject.SetActive(false);
-        hudDisplay.oneCollected.gameObject.SetActive(false);
-        hudDisplay.twoCollected.gameObject.SetActive(false);
-        hudDisplay.threeCollected.gameObject.SetActive(false);
-
-    }
 
     private void GameOver() {
         hudDisplay.gameOverText.gameObject.SetActive(true);
@@ -170,9 +135,4 @@ public class PlayerMovement : MonoBehaviour {
         hudDisplay.stepsTakenText.SetText("Total Steps Taken: " + stepsTaken.ToString());
     }
 
-    private void OpenFence() {
-        GameObject[] fence;
-        fence = GameObject.FindGameObjectsWithTag("Lock");
-        openGate.Play("GateOpen", 0, 0.0f);
-    }
 }

@@ -21,17 +21,21 @@ public class HUD : MonoBehaviour
     public GameObject circle2;
     public GameObject circle3;
 
-
-
-
-
-    void Update() { 
-        
-    }
-
     public void ResetGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Debug.Log("Game Reset");
     }
- 
+
+    public void DisableHUD() {
+        gameOverText.gameObject.SetActive(false);
+        lostResetButton.gameObject.SetActive(false);
+        gameWonText.gameObject.SetActive(false);
+        wonNextButton.gameObject.SetActive(false);
+        wonResetButton.gameObject.SetActive(false);
+        oneCollected.gameObject.SetActive(false);
+        twoCollected.gameObject.SetActive(false);
+        threeCollected.gameObject.SetActive(false);
+
+    }
+
 }

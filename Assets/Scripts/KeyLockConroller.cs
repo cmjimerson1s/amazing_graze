@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyLockConroller : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class KeyLockConroller : MonoBehaviour {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public Animator openGate;
+    private PlayerMovement player;
+
+    void Start() {
+        player = FindObjectOfType<PlayerMovement>();
+
+    }
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Player")) {
+            player.keyCollected = true;
+            gameObject.SetActive(false);
+            OpenFence();
+        }
+    }
+    private void OpenFence() {
+        GameObject[] fence;
+        fence = GameObject.FindGameObjectsWithTag("Lock");
+        openGate.Play("GateOpen", 0, 0.0f);
     }
 }
