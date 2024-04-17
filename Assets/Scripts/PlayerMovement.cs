@@ -15,13 +15,14 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] public int movesLeft;
     private int stepsTaken;
     private bool winState;
+    private bool stepIncrease;
     public bool keyCollected;
     public int collectedItems;
     public AudioSource winSFX;
     public Animator openGate;
 
     private void Start() {
-        
+
         stepsTaken = 0;
         collectedItems = 0;
         keyCollected = false;
@@ -32,16 +33,15 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (winState == true) {
             GameWon();
             return;
         }
 
         if (movesLeft >= 1) {
-            PlayerGridMovement(); 
-        } else { 
+            PlayerGridMovement();
+        } else {
             GameOver();
         }
 
@@ -53,7 +53,8 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.W)) {
             if (DetectTile(Vector3.forward)) {
                 Movement(Vector3.forward);
-                UpdateTotalStepsMinus();
+                stepIncrease = false;
+                StepUpdate(stepIncrease);
                 stepsTaken++;
 
             }
@@ -62,7 +63,8 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.A)) {
             if (DetectTile(Vector3.left)) {
                 Movement(Vector3.left);
-                UpdateTotalStepsMinus();
+                stepIncrease = false;
+                StepUpdate(stepIncrease);
                 stepsTaken++;
 
             }
@@ -71,7 +73,8 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.S)) {
             if (DetectTile(-Vector3.forward)) {
                 Movement(-Vector3.forward);
-                UpdateTotalStepsMinus();
+                stepIncrease = false;
+                StepUpdate(stepIncrease);
                 stepsTaken++;
 
             }
@@ -80,7 +83,8 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.D)) {
             if (DetectTile(Vector3.right)) {
                 Movement(Vector3.right);
-                UpdateTotalStepsMinus();
+                stepIncrease = false;
+                StepUpdate(stepIncrease);
                 stepsTaken++;
 
             }
@@ -112,15 +116,15 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         return false;
-       
-    }
-
-
-   private void UpdateTotalStepsMinus() {
-      movesLeft--;
-      hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
 
     }
+
+
+    //private void UpdateTotalStepsMinus() {
+    // movesLeft--;
+    //  hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
+
+    //}
 
 
     private void GameOver() {
@@ -135,4 +139,14 @@ public class PlayerMovement : MonoBehaviour {
         hudDisplay.stepsTakenText.SetText("Total Steps Taken: " + stepsTaken.ToString());
     }
 
+    public void StepUpdate(bool answer) {
+
+        if (answer) {
+            movesLeft++;
+            hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
+        } else {
+            movesLeft--;
+            hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
+        }
+    }
 }
