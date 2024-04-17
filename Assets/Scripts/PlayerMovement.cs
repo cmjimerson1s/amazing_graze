@@ -12,16 +12,13 @@ public class PlayerMovement : MonoBehaviour {
     private float distance = 1u;
     private HUD hudDisplay;
     private PlayerRotation spinPlayer;
-    [SerializeField] int movesLeft;
+    [SerializeField] public int movesLeft;
     private int stepsTaken;
     private bool winState;
     private bool keyCollected;
-    private int collectedItems;
-    public GameObject childObject;
-    public AudioSource grassSFX;
+    public int collectedItems;
     public AudioSource winSFX;
     public Animator openGate;
-    public Animator numberSign = null;
 
     private void Start() {
         
@@ -123,13 +120,13 @@ public class PlayerMovement : MonoBehaviour {
 
         foreach (Collider collider in colliders) {
             if (collider.CompareTag("Grass+1")) {
-                UpdateTotalStepsPlus();
-                TestMethod(collider);
-                grassSFX.Play();
+                //UpdateTotalStepsPlus();
+                //TestMethod(collider);
+                //grassSFX.Play();
             } else if (collider.CompareTag("Collectable")) {
-                collectedItems++;
-                Destroy(collider.gameObject);
-                CollectedItemUpdate();
+                //collectedItems++;
+               // Destroy(collider.gameObject);
+                //CollectedItemUpdate();
             } else if (collider.CompareTag("Key")) {
                 keyCollected = true;
                 Destroy(collider.gameObject);
@@ -142,14 +139,9 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
+
     private void UpdateTotalStepsMinus() {
         movesLeft--;
-        hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
-
-    }
-
-    private void UpdateTotalStepsPlus() {
-        movesLeft++;
         hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
 
     }
@@ -176,32 +168,6 @@ public class PlayerMovement : MonoBehaviour {
         hudDisplay.wonNextButton.gameObject.SetActive(true);
         hudDisplay.wonResetButton.gameObject.SetActive(true);
         hudDisplay.stepsTakenText.SetText("Total Steps Taken: " + stepsTaken.ToString());
-    }
-
-    private void CollectedItemUpdate() {
-        if (collectedItems == 1) {
-            hudDisplay.oneCollected.gameObject.SetActive(true);
-            hudDisplay.circle1.gameObject.SetActive(false);
-        } else if (collectedItems == 2) {
-            hudDisplay.twoCollected.gameObject.SetActive(true);
-            hudDisplay.circle2.gameObject.SetActive(false);
-        } else if (collectedItems == 3) {
-            hudDisplay.threeCollected.gameObject.SetActive(true);
-            hudDisplay.circle3.gameObject.SetActive(false);
-        }
-    }
-
-    private void TestMethod(Collider collider) {
-        collider.enabled = false;
-        GameObject firstChild = collider.gameObject.transform.GetChild(0).gameObject;
-        firstChild.SetActive(false);
-        NumberShowing(collider);
-    }
-
-    private void NumberShowing(Collider collider) {
-        GameObject number = collider.gameObject.transform.GetChild(1).gameObject;
-        number.SetActive(true);
-        numberSign.Play("NumberSign", 0, 0.0f);
     }
 
     private void OpenFence() {

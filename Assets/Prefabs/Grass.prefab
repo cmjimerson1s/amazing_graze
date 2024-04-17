@@ -344,4 +344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117d700cf6c67024e8e749a593b1caad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  childObject: {fileID: 7058378920372798846}
+  energyAmount: 1
+  numberSign: {fileID: 8896253795001460854}
+  meshChildObject: {fileID: 3887019789715423809}
+  textChildObject: {fileID: 7058378920372798846}
+  grassSFX: {fileID: 0}

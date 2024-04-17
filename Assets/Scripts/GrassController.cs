@@ -3,27 +3,56 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GrassController : MonoBehaviour
-{
-    public GameObject childObject;
+public class GrassController : MonoBehaviour {
+    
+    [SerializeField] int energyAmount;
+    [SerializeField] private Animator numberSign;
+    [SerializeField] GameObject meshChildObject;
+    [SerializeField] GameObject textChildObject;
+
+    public AudioSource grassSFX;
+
+    private HUD hudDisplay;
+    private PlayerMovement player;
 
     void Start()
     {
-        childObject.SetActive(false);   
+        hudDisplay = FindObjectOfType<HUD>();
+        player = FindObjectOfType<PlayerMovement>();
+        textChildObject.SetActive(false);   
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (childObject.activeSelf) {
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Player")) {
+            CollectGrass();
+        }
+    }
+
+    private void IsChildActive() {
+        if (textChildObject.activeSelf) {
+            numberSign.Play("NumberSign", 0, 0.0f);
             StartCoroutine(DestroyChild());
         }
-     
     }
-
     private IEnumerator DestroyChild() {
         float delayTime = 1f;
         yield return new WaitForSeconds(delayTime);
-        childObject.SetActive(false);
+        textChildObject.SetActive(false);
+    }
+
+    private void CollectGrass() {
+        grassSFX.Play();
+        UpdateTotalStepsPlus();
+        Collider collider = GetComponent<Collider>();
+        collider.enabled = false;
+        meshChildObject.SetActive(false);
+        textChildObject.SetActive(true);
+        IsChildActive();
+    }
+
+    private void UpdateTotalStepsPlus() {
+        player.movesLeft++;
+        hudDisplay.totalStepsLeft.SetText("Steps Left: " + player.movesLeft.ToString());
+
     }
 }
