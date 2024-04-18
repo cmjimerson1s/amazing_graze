@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] public int movesLeft;
     private int stepsTaken;
     private bool winState;
-    private bool stepIncrease;
     public bool keyCollected;
     public int collectedItems;
     public AudioSource winSFX;
@@ -53,8 +52,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.W)) {
             if (DetectTile(Vector3.forward)) {
                 Movement(Vector3.forward);
-                stepIncrease = false;
-                StepUpdate(stepIncrease);
+                UpdateSteps();
                 stepsTaken++;
 
             }
@@ -63,8 +61,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.A)) {
             if (DetectTile(Vector3.left)) {
                 Movement(Vector3.left);
-                stepIncrease = false;
-                StepUpdate(stepIncrease);
+                UpdateSteps(); 
                 stepsTaken++;
 
             }
@@ -73,8 +70,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.S)) {
             if (DetectTile(-Vector3.forward)) {
                 Movement(-Vector3.forward);
-                stepIncrease = false;
-                StepUpdate(stepIncrease);
+                UpdateSteps();
                 stepsTaken++;
 
             }
@@ -83,8 +79,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.D)) {
             if (DetectTile(Vector3.right)) {
                 Movement(Vector3.right);
-                stepIncrease = false;
-                StepUpdate(stepIncrease);
+                UpdateSteps();
                 stepsTaken++;
 
             }
@@ -120,13 +115,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
 
-    //private void UpdateTotalStepsMinus() {
-    // movesLeft--;
-    //  hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
-
-    //}
-
-
     private void GameOver() {
         hudDisplay.gameOverText.gameObject.SetActive(true);
         hudDisplay.lostResetButton.gameObject.SetActive(true);
@@ -139,14 +127,18 @@ public class PlayerMovement : MonoBehaviour {
         hudDisplay.stepsTakenText.SetText("Total Steps Taken: " + stepsTaken.ToString());
     }
 
-    public void StepUpdate(bool answer) {
 
-        if (answer) {
-            movesLeft++;
-            hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
-        } else {
-            movesLeft--;
-            hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
+    private void UpdateSteps() {
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 0.1f);
+        foreach (Collider collider in colliders) {
+            if (collider.CompareTag("Grass+1")){
+                movesLeft++;
+                hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
+            } else if (collider.CompareTag("Tile")) {
+                movesLeft--;
+                hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
+            }
         }
     }
 }

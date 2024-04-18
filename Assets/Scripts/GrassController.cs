@@ -11,15 +11,12 @@ public class GrassController : MonoBehaviour {
     [SerializeField] GameObject textChildObject;
 
     public AudioSource grassSFX;
-    private bool stepIncrease;
 
     private HUD hudDisplay;
-    private PlayerMovement player;
 
     void Start()
     {
         hudDisplay = FindObjectOfType<HUD>();
-        player = FindObjectOfType<PlayerMovement>();
         textChildObject.SetActive(false);   
     }
 
@@ -42,8 +39,6 @@ public class GrassController : MonoBehaviour {
     }
 
     private void CollectGrass() {
-        stepIncrease = true;
-        player.StepUpdate(stepIncrease);
         grassSFX.Play();
         Collider collider = GetComponent<Collider>();
         collider.enabled = false;
@@ -52,9 +47,4 @@ public class GrassController : MonoBehaviour {
         IsChildActive();
     }
 
-    //private void UpdateTotalStepsPlus() {
-    //    player.movesLeft++;
-    //    hudDisplay.totalStepsLeft.SetText("Steps Left: " + player.movesLeft.ToString());
-
-    //}
 }
