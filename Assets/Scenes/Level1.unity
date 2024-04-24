@@ -5897,7 +5897,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Steps Left: 4'
+  m_text: 'Steps Left: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c53982f0c928bd4caed6fc31435ce07, type: 2}
   m_sharedMaterial: {fileID: -2394798060126763258, guid: 4c53982f0c928bd4caed6fc31435ce07,
