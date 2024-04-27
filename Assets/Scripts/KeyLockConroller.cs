@@ -5,6 +5,8 @@ using UnityEngine;
 public class KeyLockConroller : MonoBehaviour {
 
     public Animator openGate;
+    public AudioSource keyCollected;
+    public AudioSource gateOpenSFX;
     private PlayerMovement player;
 
     void Start() {
@@ -15,6 +17,8 @@ public class KeyLockConroller : MonoBehaviour {
         if (other.CompareTag("Player")) {
             player.keyCollected = true;
             gameObject.SetActive(false);
+            keyCollected.Play();
+            gateOpenSFX.Play(); 
             OpenFence();
         }
     }
