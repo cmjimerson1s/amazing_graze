@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour {
         hudDisplay = FindObjectOfType<HUD>();
         spinPlayer = FindObjectOfType<PlayerRotation>();
         hudDisplay.DisableHUD();
+        hudDisplay.collectedFlowers.SetText(collectedItems.ToString() + " / 7");
 
     }
 
@@ -140,6 +141,8 @@ public class PlayerMovement : MonoBehaviour {
         foreach (Collider collider in colliders) {
             if (collider.CompareTag("Grass+1")){
                 movesLeft = startingSteps;
+                collectedItems++;
+                hudDisplay.collectedFlowers.SetText(collectedItems.ToString() + " / 7");
                 hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
                 return;
             } else if (collider.CompareTag("Tile")) {

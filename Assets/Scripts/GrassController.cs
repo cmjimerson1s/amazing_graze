@@ -13,11 +13,13 @@ public class GrassController : MonoBehaviour {
     public AudioSource grassSFX;
 
     private HUD hudDisplay;
+    private PlayerMovement player;
 
     void Start()
     {
         hudDisplay = FindObjectOfType<HUD>();
-        textChildObject.SetActive(false);   
+        player = FindObjectOfType<PlayerMovement>();
+        textChildObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other) {
