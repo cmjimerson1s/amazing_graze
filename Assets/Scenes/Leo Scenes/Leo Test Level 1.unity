@@ -11552,6 +11552,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8323651367093087967}
+    - targetCorrespondingSourceObject: {fileID: 2783764880241418557, guid: 8fbe9e08ad0620f47ac60b1516c80f81,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8323651367093087970}
   m_SourcePrefab: {fileID: 100100000, guid: 8fbe9e08ad0620f47ac60b1516c80f81, type: 3}
 --- !u!1001 &941784768236869518
 PrefabInstance:
@@ -12009,7 +12013,7 @@ PrefabInstance:
     - target: {fileID: 6089445472270910887, guid: dd08899bdf07f3149939f499c6fee2fc,
         type: 3}
       propertyPath: movesLeft
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6089445472270910887, guid: dd08899bdf07f3149939f499c6fee2fc,
         type: 3}
@@ -12207,8 +12211,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openGate: {fileID: 312413869}
+  keyFloat: {fileID: 8323651367093087970}
   keyCollected: {fileID: 823135612}
   gateOpenSFX: {fileID: 947796133}
+--- !u!95 &8323651367093087970
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8323651367093087966}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 43a407c085edf6a4c9bb436c3d44b33d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
