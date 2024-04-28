@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour {
     public bool keyCollected;
     public int collectedItems;
     public AudioSource winSFX;
+    public AudioSource movementSFX;
     public Animator openGate;
 
     private void Start() {
@@ -92,6 +93,7 @@ public class PlayerMovement : MonoBehaviour {
 
         transform.Translate(direction * distance);
         spinPlayer.PlayerMeshRotation();
+        movementSFX.Play();
 
     }
 
