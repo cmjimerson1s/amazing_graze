@@ -14,6 +14,7 @@ public class HUD : MonoBehaviour
     public GameObject lostResetButton;
     public GameObject wonResetButton;
     public GameObject wonNextButton;
+    public GameObject mainMenuButton;
     public GameObject oneCollected;
     public GameObject twoCollected;
     public GameObject threeCollected;
@@ -26,12 +27,17 @@ public class HUD : MonoBehaviour
         Debug.Log("Game Reset");
     }
 
+    public void MainMenu() {
+        SceneManager.LoadSceneAsync(0);
+    }
+
     public void DisableHUD() {
         gameOverText.gameObject.SetActive(false);
         lostResetButton.gameObject.SetActive(false);
         gameWonText.gameObject.SetActive(false);
         wonNextButton.gameObject.SetActive(false);
         wonResetButton.gameObject.SetActive(false);
+        mainMenuButton.gameObject.SetActive(false);
         oneCollected.gameObject.SetActive(false);
         twoCollected.gameObject.SetActive(false);
         threeCollected.gameObject.SetActive(false);

@@ -122,12 +122,14 @@ public class PlayerMovement : MonoBehaviour {
     private void GameOver() {
         hudDisplay.gameOverText.gameObject.SetActive(true);
         hudDisplay.lostResetButton.gameObject.SetActive(true);
+        hudDisplay.mainMenuButton.gameObject.SetActive(true);
     }
 
     private void GameWon() {
         hudDisplay.gameWonText.gameObject.SetActive(true);
         hudDisplay.wonNextButton.gameObject.SetActive(true);
         hudDisplay.wonResetButton.gameObject.SetActive(true);
+        hudDisplay.mainMenuButton.gameObject.SetActive(true);
         hudDisplay.stepsTakenText.SetText("Total Steps Taken: " + stepsTaken.ToString());
     }
 
