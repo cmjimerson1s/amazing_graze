@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     private HUD hudDisplay;
     private PlayerRotation spinPlayer;
     [SerializeField] public int movesLeft;
+    private int startingSteps;
     private int stepsTaken;
     private bool winState;
     public bool keyCollected;
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Start() {
 
+        startingSteps = movesLeft;
         stepsTaken = 0;
         collectedItems = 0;
         keyCollected = false;
@@ -135,8 +137,9 @@ public class PlayerMovement : MonoBehaviour {
         Collider[] colliders = Physics.OverlapSphere(transform.position, 0.1f);
         foreach (Collider collider in colliders) {
             if (collider.CompareTag("Grass+1")){
-                movesLeft++;
+                movesLeft = startingSteps;
                 hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
+                return;
             } else if (collider.CompareTag("Tile")) {
                 movesLeft--;
                 hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());

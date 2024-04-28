@@ -11739,7 +11739,7 @@ PrefabInstance:
     - target: {fileID: 6089445472270910887, guid: dd08899bdf07f3149939f499c6fee2fc,
         type: 3}
       propertyPath: movesLeft
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6089445472270910887, guid: dd08899bdf07f3149939f499c6fee2fc,
         type: 3}
