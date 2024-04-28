@@ -4770,7 +4770,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Won
+  m_text: Level Complete!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c53982f0c928bd4caed6fc31435ce07, type: 2}
   m_sharedMaterial: {fileID: -2394798060126763258, guid: 4c53982f0c928bd4caed6fc31435ce07,
@@ -4780,8 +4780,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4289328127
+  m_fontColor: {r: 1, g: 0.9529412, b: 0.6627451, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6095,7 +6095,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 55aa59323e39c6b40aa74373ac58689e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: adb003b21d4af9b4cb2dda4eb7e28a38, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.25
   m_Pitch: 1
@@ -7198,7 +7198,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Over
+  m_text: Out of Steps!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c53982f0c928bd4caed6fc31435ce07, type: 2}
   m_sharedMaterial: {fileID: -2394798060126763258, guid: 4c53982f0c928bd4caed6fc31435ce07,
@@ -7208,8 +7208,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4289328127
+  m_fontColor: {r: 1, g: 0.95147747, b: 0.6622641, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8839,8 +8839,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4289328127
+  m_fontColor: {r: 1, g: 0.9529412, b: 0.6627451, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
