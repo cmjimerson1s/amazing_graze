@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] public int movesLeft;
     private int startingSteps;
     private int stepsTaken;
+    [SerializeField] public int totalFlowers;
     private bool winState;
     public bool keyCollected;
     public int collectedItems;
@@ -31,7 +32,9 @@ public class PlayerMovement : MonoBehaviour {
         hudDisplay = FindObjectOfType<HUD>();
         spinPlayer = FindObjectOfType<PlayerRotation>();
         hudDisplay.DisableHUD();
-        hudDisplay.collectedFlowers.SetText(collectedItems.ToString() + " / 7");
+        //Update the final number based on the number of flowers in the level
+        hudDisplay.collectedFlowers.SetText(collectedItems.ToString() + " / " + totalFlowers.ToString());
+        hudDisplay.totalStepsLeft.SetText("Steps Left: " + startingSteps.ToString());
 
     }
 
