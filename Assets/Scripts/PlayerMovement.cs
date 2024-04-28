@@ -112,9 +112,13 @@ public class PlayerMovement : MonoBehaviour {
             if (hit.collider.CompareTag("Tile")) {
                 return true;
             } else if (hit.collider.CompareTag("WinTile")) {
-                winSFX.Play();
-                winState = true;
-                return true;
+                if (collectedItems != totalFlowers) {
+                    return false;
+                } else {
+                    winSFX.Play();
+                    winState = true;
+                    return true;
+                }
             }
         }
 
