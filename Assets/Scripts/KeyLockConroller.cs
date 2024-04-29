@@ -5,16 +5,22 @@ using UnityEngine;
 public class KeyLockConroller : MonoBehaviour {
 
     public Animator openGate;
+    public Animator keyFloat;
+    public AudioSource keyCollected;
+    public AudioSource gateOpenSFX;
     private PlayerMovement player;
 
     void Start() {
         player = FindObjectOfType<PlayerMovement>();
+        keyFloat.Play("KeyFloat", 0, 0.0f);
 
     }
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             player.keyCollected = true;
             gameObject.SetActive(false);
+            keyCollected.Play();
+            gateOpenSFX.Play(); 
             OpenFence();
         }
     }

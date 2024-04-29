@@ -13,21 +13,28 @@ public class PlayerMovement : MonoBehaviour {
     private HUD hudDisplay;
     private PlayerRotation spinPlayer;
     [SerializeField] public int movesLeft;
+    private int startingSteps;
     private int stepsTaken;
+    [SerializeField] public int totalFlowers;
     private bool winState;
     public bool keyCollected;
     public int collectedItems;
     public AudioSource winSFX;
+    public AudioSource movementSFX;
     public Animator openGate;
 
     private void Start() {
 
+        startingSteps = movesLeft;
         stepsTaken = 0;
         collectedItems = 0;
         keyCollected = false;
         hudDisplay = FindObjectOfType<HUD>();
         spinPlayer = FindObjectOfType<PlayerRotation>();
         hudDisplay.DisableHUD();
+        //Update the final number based on the number of flowers in the level
+        hudDisplay.collectedFlowers.SetText(collectedItems.ToString() + " / " + totalFlowers.ToString());
+        hudDisplay.totalStepsLeft.SetText("Steps Left: " + startingSteps.ToString());
 
     }
 
@@ -92,6 +99,7 @@ public class PlayerMovement : MonoBehaviour {
 
         transform.Translate(direction * distance);
         spinPlayer.PlayerMeshRotation();
+        movementSFX.Play();
 
     }
 
@@ -104,9 +112,13 @@ public class PlayerMovement : MonoBehaviour {
             if (hit.collider.CompareTag("Tile")) {
                 return true;
             } else if (hit.collider.CompareTag("WinTile")) {
-                winSFX.Play();
-                winState = true;
-                return true;
+                if (collectedItems != totalFlowers) {
+                    return false;
+                } else {
+                    winSFX.Play();
+                    winState = true;
+                    return true;
+                }
             }
         }
 
@@ -118,12 +130,14 @@ public class PlayerMovement : MonoBehaviour {
     private void GameOver() {
         hudDisplay.gameOverText.gameObject.SetActive(true);
         hudDisplay.lostResetButton.gameObject.SetActive(true);
+        hudDisplay.mainMenuButton.gameObject.SetActive(true);
     }
 
     private void GameWon() {
         hudDisplay.gameWonText.gameObject.SetActive(true);
         hudDisplay.wonNextButton.gameObject.SetActive(true);
         hudDisplay.wonResetButton.gameObject.SetActive(true);
+        hudDisplay.mainMenuButton.gameObject.SetActive(true);
         hudDisplay.stepsTakenText.SetText("Total Steps Taken: " + stepsTaken.ToString());
     }
 
@@ -133,8 +147,11 @@ public class PlayerMovement : MonoBehaviour {
         Collider[] colliders = Physics.OverlapSphere(transform.position, 0.1f);
         foreach (Collider collider in colliders) {
             if (collider.CompareTag("Grass+1")){
-                movesLeft++;
+                movesLeft = startingSteps;
+                collectedItems++;
+                hudDisplay.collectedFlowers.SetText(collectedItems.ToString() + " / 7");
                 hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
+                return;
             } else if (collider.CompareTag("Tile")) {
                 movesLeft--;
                 hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
