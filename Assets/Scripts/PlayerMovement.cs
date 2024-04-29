@@ -149,7 +149,7 @@ public class PlayerMovement : MonoBehaviour {
             if (collider.CompareTag("Grass+1")){
                 movesLeft = startingSteps;
                 collectedItems++;
-                hudDisplay.collectedFlowers.SetText(collectedItems.ToString() + " / 7");
+                hudDisplay.collectedFlowers.SetText(collectedItems.ToString() + " / " + totalFlowers.ToString());
                 hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
                 return;
             } else if (collider.CompareTag("Tile")) {

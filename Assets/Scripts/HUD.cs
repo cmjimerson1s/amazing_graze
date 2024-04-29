@@ -27,6 +27,11 @@ public class HUD : MonoBehaviour
         SceneManager.LoadSceneAsync(0);
     }
 
+    public void NextLevel() {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentScene + 1);
+    }
+
     public void DisableHUD() {
         gameOverText.gameObject.SetActive(false);
         lostResetButton.gameObject.SetActive(false);
