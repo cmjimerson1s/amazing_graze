@@ -12,7 +12,7 @@ public class KeyLockConroller : MonoBehaviour {
 
     void Start() {
         player = FindObjectOfType<PlayerMovement>();
-        keyFloat.Play("Key", 0, 0.0f);
+        keyFloat.Play("KeyFloat", 0, 0.0f);
 
     }
     private void OnTriggerEnter(Collider other) {
