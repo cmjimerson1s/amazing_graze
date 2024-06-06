@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour {
         hudDisplay = FindObjectOfType<HUD>();
         spinPlayer = FindObjectOfType<PlayerRotation>();
         hudDisplay.DisableHUD();
-        //Update the final number based on the number of flowers in the level
         hudDisplay.collectedFlowers.SetText(collectedItems.ToString() + " / " + totalFlowers.ToString());
         hudDisplay.totalStepsLeft.SetText("Steps Left: " + startingSteps.ToString());
 
