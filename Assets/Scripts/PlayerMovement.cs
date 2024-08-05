@@ -6,6 +6,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.TextCore;
 
 public class PlayerMovement : MonoBehaviour {
     private float distance = 1u;
@@ -21,6 +23,9 @@ public class PlayerMovement : MonoBehaviour {
     public AudioSource winSFX;
     public AudioSource movementSFX;
     public Animator openGate;
+    private PersistantData saveData;
+    public string season;
+
 
     private void Start() {
 
@@ -30,9 +35,12 @@ public class PlayerMovement : MonoBehaviour {
         keyCollected = false;
         hudDisplay = FindObjectOfType<HUD>();
         spinPlayer = FindObjectOfType<PlayerRotation>();
+        saveData = FindObjectOfType<PersistantData>();
         hudDisplay.DisableHUD();
         hudDisplay.collectedFlowers.SetText(collectedItems.ToString() + " / " + totalFlowers.ToString());
         hudDisplay.totalStepsLeft.SetText("Steps Left: " + startingSteps.ToString());
+        season = "Summer";
+        
 
     }
 
@@ -114,7 +122,9 @@ public class PlayerMovement : MonoBehaviour {
                     return false;
                 } else {
                     winSFX.Play();
+                    stepsTaken--;
                     winState = true;
+                    UpdateSaveData(stepsTaken + 1, season);
                     return true;
                 }
             }
@@ -155,5 +165,11 @@ public class PlayerMovement : MonoBehaviour {
                 hudDisplay.totalStepsLeft.SetText("Steps Left: " + movesLeft.ToString());
             }
         }
+    }
+
+    private void UpdateSaveData(int steps, string season) {
+        int exampleSteps = steps;
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        saveData.LevelSaveData(season, currentScene, exampleSteps);
     }
 }

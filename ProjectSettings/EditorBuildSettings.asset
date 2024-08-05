@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ThankYou.unity
     guid: 855ef21a37e1f7d48a363247227712a5
+  - enabled: 1
+    path: Assets/Scenes/TemplateLevel.unity
+    guid: 5861f0b7f880000479dd315445c13cda
   m_configObjects: {}
