@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: dc66b5192b185794e8685d458e6357c7
+guid: 64a615ac90972bf4e9a3bfdeba2b7215
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - saveDict: {fileID: 11400000, guid: a926a03a575edb94aa3b589207ed3b12, type: 2}
-  - saveGame: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

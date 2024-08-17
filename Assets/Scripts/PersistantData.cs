@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 public class PersistantData : MonoBehaviour
 {
     public SceneInfo saveDict;
+    public TestDataScript saveGame;
 
     public void LevelSaveData(string season, int level, int steps) {
         if (saveDict.saveDataInfo == null) {
-            saveDict.Initialize();
+            saveDict.Initialize(season);
         }
         AddNewLevelSteps(season, level, steps);
         PrintDictionary();
@@ -36,10 +37,11 @@ public class PersistantData : MonoBehaviour
                 }
             }
         };
+
         }
     }
 
-    void PrintDictionary() {
+    public void PrintDictionary() {
         foreach (var mainEntry in saveDict.saveDataInfo) {
             Debug.Log(mainEntry.Key + ":");
             foreach (var levelEntry in mainEntry.Value) {
