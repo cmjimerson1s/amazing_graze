@@ -11,6 +11,9 @@ using System.IO;
 using Unity.VisualScripting;
 using System.Net;
 
+public class SaveData : Dictionary<string, Dictionary<string, Dictionary<string, string>>> {
+
+}
 
 public class TestDataScript : MonoBehaviour
 {
@@ -20,82 +23,16 @@ public class TestDataScript : MonoBehaviour
     public TMP_InputField levelNum;
     public TMP_InputField stepsNum;
 
-
     public SceneInfo dataToSave;
     private IDataService DataService = new JsonDataService();
     private bool EncryptionEnabled;
-    [SerializeField] string NameText;
-    public Dictionary<string, Dictionary<string, Dictionary<string, int>>> testData;
     public Dictionary<string, Dictionary<string, Dictionary<string, string>>> newTestData;
-
-
-    public void TestDataStructure() {
-        testData = new Dictionary<string, Dictionary<string, Dictionary<string, int>>> {
-            {"Summer", new Dictionary<string, Dictionary<string, int>> {
-                {$"Level {1}", new Dictionary<string, int> {
-                    {"Steps", 1 }
-                } }
-            } }
-        };
-    }
-
-    public void CreateDataStructure(string season, int level, int steps) {
-        if (testData == null) {
-            TestDataStructure();
-        }
-        TestDataInitialize(season, level, steps);
-        SerializeJson();
-
-    }
-    public void SerializeJson() {
-        if (DataService.SaveData("/player-stats.json", testData, EncryptionEnabled)) {
-            Debug.Log("Saved Successfully");
-            saveTextField.SetText(JsonConvert.SerializeObject(testData));
-
-        } else {
-            Debug.LogError("Could not save file! Show something on the UI about it!");
-            saveTextField.text = "<color=#ff0000>Error saving data!</color>";
-        }
-    }
-    
-    public void DeserializeJson() {
-        Dictionary<string, Dictionary<string, Dictionary<string, string>>> newTestData = DataService.LoadData<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>("/player-stats.json", EncryptionEnabled);
-        loadTextField.SetText(JsonConvert.SerializeObject(newTestData));
-    }
-
-   public void TestDataInitialize(string season, int level, int steps) {
-        testData = new Dictionary<string, Dictionary<string, Dictionary<string, int>>> {
-            {season, new Dictionary<string, Dictionary<string, int>> {
-                {$"Level {level}", new Dictionary<string, int> {
-                    {"Steps", steps }
-                } }
-            } }
-        };
-    }
 
     public void GetData() {
         string season = seasonTxt.text;
         string level = levelNum.text;
         string steps = stepsNum.text;
         SaveStart(season, level, steps);
-    }
-
-    public void DataBuild(string season, string level, string steps) {
-        newTestData = new Dictionary<string, Dictionary<string, Dictionary<string, string>>> {
-            {season, new Dictionary<string, Dictionary<string, string>> {
-                {level, new Dictionary<string, string> {
-                    {"Steps: ", steps }
-                } }
-            } }
-        };
-        if (DataService.SaveData("/player-stats.json", newTestData, EncryptionEnabled)) {
-            Debug.Log("Saved Successfully");
-            saveTextField.SetText(JsonConvert.SerializeObject(newTestData));
-
-        } else {
-            Debug.LogError("Could not save file! Show something on the UI about it!");
-            saveTextField.text = "<color=#ff0000>Error saving data!</color>";
-        }
     }
 
     public void SaveStart(string mainKey, string newLevelKey, string newStepsValue) {
@@ -108,14 +45,7 @@ public class TestDataScript : MonoBehaviour
                 levelDict[newLevelKey] = new Dictionary<string, string> {
                 { "Steps", newStepsValue }
             };
-                if (DataService.SaveData("/player-stats.json", newTestData, EncryptionEnabled)) {
-                    Debug.Log("Saved Successfully");
-                    saveTextField.SetText(JsonConvert.SerializeObject(newTestData));
-
-                } else {
-                    Debug.LogError("Could not save file! Show something on the UI about it!");
-                    saveTextField.text = "<color=#ff0000>Error saving data!</color>";
-                }
+                Save(newTestData);
             } else {
                 newTestData[mainKey] = new Dictionary<string, Dictionary<string, string>> {
                 {
@@ -125,14 +55,7 @@ public class TestDataScript : MonoBehaviour
                 }
                 }
             };
-                if (DataService.SaveData("/player-stats.json", newTestData, EncryptionEnabled)) {
-                    Debug.Log("Saved Successfully");
-                    saveTextField.SetText(JsonConvert.SerializeObject(newTestData));
-
-                } else {
-                    Debug.LogError("Could not save file! Show something on the UI about it!");
-                    saveTextField.text = "<color=#ff0000>Error saving data!</color>";
-                }
+                Save(newTestData);
             }
         } else {
             string season = mainKey;
@@ -142,9 +65,16 @@ public class TestDataScript : MonoBehaviour
         }
 
     }
-
-
-        
+    public void DataBuild(string season, string level, string steps) {
+        SaveData newTestData = new SaveData {
+            {season, new Dictionary<string, Dictionary<string, string>> {
+                {level, new Dictionary<string, string> {
+                    {"Steps: ", steps }
+                } }
+            } }
+        };
+        Save(newTestData);
+    }
 
     public void DeleteSave() {
         string path = "/player-stats.json";
@@ -157,8 +87,17 @@ public class TestDataScript : MonoBehaviour
         }
     }
 
-    class SaveData : Dictionary<string, Dictionary<string, Dictionary<string, string>>> {
+    public void Save(SaveData levelInfo) {
+        if (DataService.SaveData("/player-stats.json", levelInfo, EncryptionEnabled)) {
+            Debug.Log("Saved Successfully");
+            saveTextField.SetText(JsonConvert.SerializeObject(levelInfo));
+
+        } else {
+            Debug.LogError("Could not save file! Show something on the UI about it!");
+            saveTextField.text = "<color=#ff0000>Error saving data!</color>";
+        }
 
     }
+
 }
 
