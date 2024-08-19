@@ -1,14 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
+using System.IO;
+using TMPro;
 
 public class LevelSelect : MonoBehaviour
 {
-    public GameObject canvasPrefab;  // Prefab of the Canvas
-    public GameObject uiElementPrefab;  // Prefab of the UI Element (e.g., Button, Text)
-    public List<string> items;  // Example list of items
+    private string filePath;
+    public TMP_InputField profileOne;
 
     void Start() {
-      
+        filePath = Application.persistentDataPath;
+        string[] files = System.IO.Directory.GetFiles(filePath);
+        Debug.Log(files[0]);
+        foreach (string file in files) {
+            string fileName = Path.GetFileName(file);
+            Debug.Log("File:" +  fileName);
+        }
     }
 }
