@@ -19,13 +19,7 @@ public class LevelSelect : MonoBehaviour {
     void Start() {
         DisableTMPInputs();
         CollectProfileData();
-        filePath = Application.persistentDataPath;
-        string[] files = System.IO.Directory.GetFiles(filePath);
-        Debug.Log(files[0]);
-        foreach (string file in files) {
-            string fileName = Path.GetFileName(file);
-            Debug.Log("File:" + fileName);
-        }
+
     }
 
     public void CollectProfileData() {
@@ -44,17 +38,27 @@ public class LevelSelect : MonoBehaviour {
     public void DisplayProfileData(List<string> profileNames) {
         if (profileNames.Count < 1) {
             Debug.Log("No names found");
+            profileOneName.SetText("New Game");
         } else {
-            foreach (string profileName in profileNames) {
-                Debug.Log(profileName);
-            }
+            profileOneName.SetText($"{profileNames[0]}");
         }
     }
 
-    public void NewGame(List<string> profileList) {
-        string profileName = profileOneInput.text;
-        profileList.Add(profileName);
-        SaveProfile(profileList);
+    public void NewGame() {
+        string profile = "/user-profiles.json";
+        filePath = Application.persistentDataPath + profile;
+        if (File.Exists(filePath)) {
+            List<string> profileNames = DataService.LoadData<List<string>>(profile, EncryptionEnabled);
+            string profileName = profileOneInput.text;
+            profileNames.Add(profileName);
+            SaveProfile(profileNames);
+        } else {
+            Debug.Log("No file found");
+            List<string> profileNames = new List<string>();
+            string profileName = profileOneInput.text;
+            profileNames.Add(profileName);
+            SaveProfile(profileNames);
+        }
 
     }
 
@@ -79,4 +83,5 @@ public class LevelSelect : MonoBehaviour {
         profileOneName.SetText("Enter Name");
 
     }
+
 }
