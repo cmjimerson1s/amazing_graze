@@ -37,11 +37,15 @@ public class ProfileManager : MonoBehaviour {
 
     public void DisplayProfileData(List<string> profileNames) {
 
-       if (profileNames.Count == 1) {
+        if (profileNames.Count < 1) {
+            profileOne.GetComponentInChildren<TextMeshProUGUI>().text = "NewGame";
+            profileTwo.GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
+            profileThree.GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
+        } else if (profileNames.Count == 1) {
             DisplayProfileInformation(profileOne, profileNames[0]);
             profileTwo.GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
             profileThree.GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
-       } else if (profileNames.Count == 2) {
+        } else if (profileNames.Count == 2) {
             DisplayProfileInformation(profileOne, profileNames[0]);
             DisplayProfileInformation(profileTwo, profileNames[1]);
             profileThree.GetComponentInChildren<TextMeshProUGUI>().text = "New Game";
