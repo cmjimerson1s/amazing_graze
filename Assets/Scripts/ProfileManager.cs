@@ -8,6 +8,7 @@ using static UnityEditor.FilePathAttribute;
 using File = System.IO.File;
 using Newtonsoft.Json;
 using UnityEngine.UI;
+using UnityEngine.Profiling;
 
 public class ProfileManager : MonoBehaviour {
     private IDataService DataService = new JsonDataService();
@@ -16,6 +17,8 @@ public class ProfileManager : MonoBehaviour {
     public GameObject profileOne;
     public GameObject profileTwo;
     public GameObject profileThree;
+
+    public ProfileNameData savedProfileName;
 
     void Start() {
         CollectProfileData();
@@ -65,6 +68,7 @@ public class ProfileManager : MonoBehaviour {
             TMP_InputField profileNameInput = profileUI.GetComponentInChildren<TMP_InputField>();
             string profileName = profileNameInput.text;
             profileNames.Add(profileName);
+            savedProfileName.savedName = profileName;
             SaveProfile(profileNames);
         } else {
             Debug.Log("No file found");
@@ -108,5 +112,15 @@ public class ProfileManager : MonoBehaviour {
         imageText.text = $"{profileName}";
     }
 
-
+    public void LoadGame(GameObject profileUI) {
+        TMP_InputField profileInputName = profileUI.GetComponentInChildren<TMP_InputField>();
+        if (profileInputName.interactable) {
+            savedProfileName.savedName = profileInputName.text;
+            Debug.Log(savedProfileName.savedName);
+        } else {
+            TextMeshProUGUI imageText = profileUI.GetComponentInChildren<TextMeshProUGUI>();
+            savedProfileName.savedName = imageText.text;
+            Debug.Log(savedProfileName.savedName);
+        }
+    }
 }

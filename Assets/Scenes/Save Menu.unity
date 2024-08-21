@@ -10119,7 +10119,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1013606173}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1273274004}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1013606173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13085,6 +13097,7 @@ MonoBehaviour:
   profileOne: {fileID: 2141485784}
   profileTwo: {fileID: 671412967}
   profileThree: {fileID: 770842704}
+  savedProfileName: {fileID: 11400000, guid: e5a060951766067409af745113d7794d, type: 2}
 --- !u!1 &1277010362
 GameObject:
   m_ObjectHideFlags: 0
