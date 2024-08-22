@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class PersistantData : MonoBehaviour
 {
     public SceneInfo saveDict;
-    public TestDataScript saveGame;
 
     public void LevelSaveData(string season, int level, int steps) {
         if (saveDict.saveDataInfo == null) {
@@ -51,5 +50,9 @@ public class PersistantData : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void TestMethod() {
+        Debug.Log("This thing workds");
     }
 }

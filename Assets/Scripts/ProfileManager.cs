@@ -9,6 +9,7 @@ using File = System.IO.File;
 using Newtonsoft.Json;
 using UnityEngine.UI;
 using UnityEngine.Profiling;
+using UnityEngine.SceneManagement;
 
 public class ProfileManager : MonoBehaviour {
     private IDataService DataService = new JsonDataService();
@@ -116,11 +117,11 @@ public class ProfileManager : MonoBehaviour {
         TMP_InputField profileInputName = profileUI.GetComponentInChildren<TMP_InputField>();
         if (profileInputName.interactable) {
             savedProfileName.savedName = profileInputName.text;
-            Debug.Log(savedProfileName.savedName);
+            SceneManager.LoadScene("LevelSelect");
         } else {
             TextMeshProUGUI imageText = profileUI.GetComponentInChildren<TextMeshProUGUI>();
             savedProfileName.savedName = imageText.text;
-            Debug.Log(savedProfileName.savedName);
+            SceneManager.LoadScene("LevelSelect");
         }
     }
 }

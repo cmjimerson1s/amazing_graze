@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class LevelSelect : MonoBehaviour
 {
     public GameObject levelUI;
+    public ProfileNameData savedProfileName;
     public int levelID;
 
     public void Start() {

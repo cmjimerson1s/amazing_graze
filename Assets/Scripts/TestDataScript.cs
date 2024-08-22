@@ -11,9 +11,9 @@ using System.IO;
 using Unity.VisualScripting;
 using System.Net;
 
-public class SaveData : Dictionary<string, Dictionary<string, Dictionary<string, string>>> {
+//public class SaveData : Dictionary<string, Dictionary<string, Dictionary<string, string>>> {
 
-}
+//}
 
 public class TestDataScript : MonoBehaviour
 {
@@ -30,26 +30,26 @@ public class TestDataScript : MonoBehaviour
 
     public void GetData() {
         string season = seasonTxt.text;
-        string level = levelNum.text;
-        string steps = stepsNum.text;
+        int level = 0;
+        int steps = 0;
         SaveStart(season, level, steps);
     }
 
-    public void SaveStart(string mainKey, string newLevelKey, string newStepsValue) {
+    public void SaveStart(string mainKey, int newLevelKey, int newStepsValue) {
         string path = "/player-stats.json";
         string location = Application.persistentDataPath + path;
         if (File.Exists(location)) {
             SaveData newTestData = DataService.LoadData<SaveData>("/player-stats.json", EncryptionEnabled);
             if (newTestData.ContainsKey(mainKey)) {
                 var levelDict = newTestData[mainKey];
-                levelDict[newLevelKey] = new Dictionary<string, string> {
+                levelDict[newLevelKey] = new Dictionary<string, int> {
                 { "Steps", newStepsValue }
             };
                 Save(newTestData);
             } else {
-                newTestData[mainKey] = new Dictionary<string, Dictionary<string, string>> {
+                newTestData[mainKey] = new Dictionary<int, Dictionary<string, int>> {
                 {
-                    newLevelKey, new Dictionary<string, string>
+                    newLevelKey, new Dictionary<string, int>
                 {
                     { "Steps", newStepsValue }
                 }
@@ -59,16 +59,16 @@ public class TestDataScript : MonoBehaviour
             }
         } else {
             string season = mainKey;
-            string level = newLevelKey;
-            string steps = newStepsValue;
+            int level = newLevelKey;
+            int steps = newStepsValue;
             DataBuild(season, level, steps);
         }
 
     }
-    public void DataBuild(string season, string level, string steps) {
+    public void DataBuild(string season, int level, int steps) {
         SaveData newTestData = new SaveData {
-            {season, new Dictionary<string, Dictionary<string, string>> {
-                {level, new Dictionary<string, string> {
+            {season, new Dictionary<int, Dictionary<string, int>> {
+                {level, new Dictionary<string, int> {
                     {"Steps: ", steps }
                 } }
             } }
@@ -99,5 +99,8 @@ public class TestDataScript : MonoBehaviour
 
     }
 
+    public void TestMethod() {
+        Debug.Log("Hello");
+    }
 }
 
