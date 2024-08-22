@@ -64,6 +64,7 @@ public class ProfileManager : MonoBehaviour {
     public void NewGame(GameObject profileUI) {
         string profile = "/user-profiles.json";
         filePath = Application.persistentDataPath + profile;
+        //If there is already a file it loads it and updates with the new input name
         if (File.Exists(filePath)) {
             List<string> profileNames = DataService.LoadData<List<string>>(profile, EncryptionEnabled);
             TMP_InputField profileNameInput = profileUI.GetComponentInChildren<TMP_InputField>();
@@ -71,13 +72,17 @@ public class ProfileManager : MonoBehaviour {
             profileNames.Add(profileName);
             savedProfileName.savedName = profileName;
             SaveProfile(profileNames);
+            SceneManager.LoadScene("LevelSelect");
         } else {
+        //If there isn't a file, it creates one and adds the new input name
             Debug.Log("No file found");
             List<string> profileNames = new List<string>();
             TMP_InputField profileNameInput = profileUI.GetComponentInChildren<TMP_InputField>();
             string profileName = profileNameInput.text;
             profileNames.Add(profileName);
+            savedProfileName.savedName = profileName;
             SaveProfile(profileNames);
+            SceneManager.LoadScene("LevelSelect");
         }
 
     }

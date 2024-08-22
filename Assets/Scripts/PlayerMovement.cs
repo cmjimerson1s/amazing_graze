@@ -24,7 +24,9 @@ public class PlayerMovement : MonoBehaviour {
     public AudioSource movementSFX;
     public Animator openGate;
     private PersistantData saveData;
+    public SaveLoad saveGame;
     public string season;
+    public int levelID;
 
 
     private void Start() {
@@ -169,7 +171,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void UpdateSaveData(int steps, string season) {
         int exampleSteps = steps;
-        int currentScene = SceneManager.GetActiveScene().buildIndex;
-        saveData.LevelSaveData(season, currentScene, exampleSteps);
+        int currentScene = 1;
+        saveGame.SaveLevelData(season, currentScene, exampleSteps);
     }
 }

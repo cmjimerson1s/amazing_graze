@@ -22,20 +22,40 @@ public class SaveLoad : MonoBehaviour {
             Debug.Log("GameFileFound");
             return profileSaveData;
         } else {
-            SaveData profileSaveData = InitializeData();
+            SaveData profileSaveData = InitializeData("Summer", 0, 0);
             Debug.Log("CreatingGameFile");
             return profileSaveData;
         }
     }
 
-    public SaveData InitializeData() {
-        string season = "Summer";
-        int level = 0;
-        int steps = 0;
+    public void SaveLevelData(string mainKey, int newLevelKey, int newStepsValue) {
+        string path = $"/{profileName.savedName}{pathSuffix}";
+        SaveData saveGameData = DataService.LoadData<SaveData>(path, EncryptionEnabled);
+        if (saveGameData.ContainsKey(mainKey)) {
+            var levelDict = saveGameData[mainKey];
+            levelDict[newLevelKey] = new Dictionary<string, int>
+            {
+                { "Steps", newStepsValue }
+            };
+            Save(saveGameData);
+        } else {
+            saveGameData[mainKey] = new Dictionary<int, Dictionary<string, int>> {
+                {
+                    newLevelKey, new Dictionary<string, int>
+                {
+                    { "Steps", newStepsValue }
+                }
+                }
+            };
+            Save(saveGameData);
+        }
+    }
+
+    public SaveData InitializeData(string season, int level, int steps) {
         SaveData newSaveData = new SaveData {
             {season, new Dictionary<int, Dictionary<string, int>> {
                 {level, new Dictionary<string, int> {
-                    {"Steps: ", steps }
+                    {"Steps", steps }
                 } }
             } }
         };

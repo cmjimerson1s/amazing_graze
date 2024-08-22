@@ -36,10 +36,10 @@ public class TestDataScript : MonoBehaviour
     }
 
     public void SaveStart(string mainKey, int newLevelKey, int newStepsValue) {
-        string path = "/player-stats.json";
+        string path = "/Chris-save-game-data.json";
         string location = Application.persistentDataPath + path;
         if (File.Exists(location)) {
-            SaveData newTestData = DataService.LoadData<SaveData>("/player-stats.json", EncryptionEnabled);
+            SaveData newTestData = DataService.LoadData<SaveData>("/Chris-save-game-data.json", EncryptionEnabled);
             if (newTestData.ContainsKey(mainKey)) {
                 var levelDict = newTestData[mainKey];
                 levelDict[newLevelKey] = new Dictionary<string, int> {
@@ -77,7 +77,7 @@ public class TestDataScript : MonoBehaviour
     }
 
     public void DeleteSave() {
-        string path = "/player-stats.json";
+        string path = "/Chris-save-game-data.json";
         string location = Application.persistentDataPath + path;
         if (File.Exists(location)) {
                 Debug.Log("Deleting file");
@@ -88,7 +88,7 @@ public class TestDataScript : MonoBehaviour
     }
 
     public void Save(SaveData levelInfo) {
-        if (DataService.SaveData("/player-stats.json", levelInfo, EncryptionEnabled)) {
+        if (DataService.SaveData("/Chris-save-game-data.json", levelInfo, EncryptionEnabled)) {
             Debug.Log("Saved Successfully");
             saveTextField.SetText(JsonConvert.SerializeObject(levelInfo));
 
